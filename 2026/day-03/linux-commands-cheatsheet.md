@@ -45,15 +45,20 @@ Designed to be scanned under pressure.
 
 | Command | Usage | Why it matters |
 |------|------|---------------|
-| `ip addr` | Show IP addresses | Interface debugging |
-| `ip route` | Show routing table | Network path issues |
+| `ip addr` | Shows addresses assigned to all network interfaces | Interface debugging |
+| `ifconfig` | Display all network interfaces with IP addresses | Interface debugging |
 | `ping host` | Check connectivity | Is it reachable? |
 | `ss -tulnp` | Open ports & services | What’s listening |
-| `netstat -tulnp` | Legacy port check | Old systems |
+| `netstat -nutlp` | Legacy port check | Old systems |
 | `curl url` | Test HTTP endpoint | API health |
 | `dig domain` | DNS lookup | DNS resolution issues |
 | `traceroute host` | Path tracing | Network latency |
 | `nc -zv host port` | Port connectivity test | Firewall checks |
+| `whois domain` | Display DNS info from domain | Identifies network ownership/accountability |
+| `host domain` | Display DNS IP address for the domain | Maps names to IPs |
+| `wget link` | Download from location link | Downloads files via CLI |
+| `ufw allow port` | Allow traffic from specific port through a firewall | Permits specific network traffic |
+| `nmcli` | Command-line tool for network management | managing network in system |
 
 ---
 
@@ -61,7 +66,7 @@ Designed to be scanned under pressure.
 
 | Command | Usage | Why it matters |
 |------|------|---------------|
-| `tail -f file` | Live log view | Real-time debugging |
+| `tail -f file` | output the last part of files | Real-time debugging |
 | `less file` | Scroll logs safely | Large file handling |
 | `head file` | First lines of file | Quick check |
 | `grep "error" file` | Search logs | Find failures |
@@ -78,6 +83,7 @@ Designed to be scanned under pressure.
 - Disk full issues cause more outages than bugs  
 - Always check **network + DNS** before blaming the app  
 - Simple commands solve most production problems  
+- At last RTFM! for more info
 
 ---
 
