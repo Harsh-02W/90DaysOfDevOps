@@ -1,239 +1,233 @@
-<<<<<<< HEAD
-**Linux Architecture – Core Understanding for DevOps**
-=======
-Linux Architecture – Core Understanding for DevOps
->>>>>>> mukulwarude-changes
+# 🐧 Linux Operating System Architecture  
+**Day 02 – 90 Days DevOps Challenge**  
+> Understanding how Linux components interact to manage hardware, run applications, and maintain system stability.
 
-Linux is not a tool you memorize.
-It is a system you learn to reason about under pressure.
+The Linux operating system architecture defines how different components interact to:
 
-1. Big Picture: How Linux Actually Works
+- Manage hardware resources  
+- Run applications  
+- Provide a stable and secure environment  
 
-Think of Linux as three layers, not one OS blob:
+Linux follows a **layered architecture**, where each layer has a specific responsibility and communicates with the one below it.
 
-[ User Applications ]
-        ↓
-[ User Space (Shell, Services, Tools) ]
-        ↓
-[ Kernel ]
-        ↓
-[ Hardware ]
+## 🏗 Linux System Architecture Diagram
 
+![Linux System Architecture](https://s3.ap-south-1.amazonaws.com/myinterviewtrainer-domestic/public_assets/assets/000/000/304/original/Linux_System_Architecture.png?1618826318)
 
-Rule of Linux:
-👉 Nothing touches hardware except the kernel
 
-Everything else negotiates.
+---
 
-2. The Linux Kernel (The Authority)
+# 🏗 Main Components of Linux OS
 
-The kernel is responsible for control and fairness.
+1. Application  
+2. Shell  
+3. Kernel  
+4. Hardware  
+5. System Utilities  
+6. System Libraries  
 
-What the Kernel Manages
+Each layer builds on the one beneath it, forming a structured and efficient system.
 
-Process scheduling (who gets CPU, when)
+---
 
-Memory management (RAM, swap)
+# 1️⃣ Kernel
 
-File systems (read/write permissions, caching)
+The **Kernel** is the core of the Linux operating system.  
+It sits between hardware and user space, managing resources and ensuring communication between software and hardware.
 
-Networking (packets, ports, sockets)
+## 🔹 Responsibilities of the Kernel
 
-Device drivers (disk, NIC, keyboard)
+- **Memory Management** – Allocates and manages system memory efficiently  
+- **Process Management** – Schedules and controls execution of processes  
+- **Resource Allocation** – Distributes CPU, memory, and I/O resources  
+- **Device Management** – Controls hardware through device drivers  
+- **Application Interaction** – Acts as a bridge between applications and hardware  
+- **Security Enforcement** – Applies access control and system-level protections  
 
-Key Insight
+The kernel ensures stability, fairness, and security.
 
-User programs ask the kernel to do things using system calls.
-If the kernel says no, the program cannot proceed.
+---
 
-This is why permissions, limits, and failures exist.
+## 🧩 Types of Kernels
 
-3. User Space (Where You Live)
+### 1. Monolithic Kernel
 
-User space contains:
+- All core services (process management, memory, file systems, drivers) run in kernel space  
+- High performance due to direct communication  
+- Larger size makes maintenance more complex  
 
-Shells (bash, zsh)
+> Linux primarily uses a monolithic architecture with modular support.
 
-Core utilities (ls, ps, grep)
+---
 
-Services (nginx, docker)
+### 2. Microkernel
 
-Your applications
+- Only essential services run in kernel space  
+- Other services run in user space  
+- Better modularity and security  
+- Performance overhead due to inter-process communication  
 
-Why User Space Is Safe
+---
 
-Crashes don’t kill the system
+### 3. Exokernel
 
-Permissions are enforced
+- Exposes hardware resources directly to applications  
+- High flexibility and performance  
+- Minimal abstraction increases complexity  
 
-Isolation enables multi-user systems
+---
 
-If a service crashes, Linux survives. That’s not accidental. That’s design.
+### 4. Hybrid Kernel
 
-4. systemd and init (The First Breath)
-What Happens at Boot
+- Combines monolithic and microkernel features  
+- Balances performance and modularity  
+- Common in modern operating systems  
 
-Kernel loads into memory
+---
 
-Kernel starts PID 1
+## 🔧 Main Subsystems of the Linux Kernel
 
-PID 1 = systemd
+- **Process Scheduler** – Distributes CPU time fairly among processes  
+- **Memory Management Unit** – Manages allocation of memory resources  
+- **Virtual File System (VFS)** – Provides unified interface to different file systems  
+- **Networking Subsystem** – Handles network protocols and communication  
+- **Inter-Process Communication (IPC)** – Enables communication between processes  
 
-systemd starts everything else
+These subsystems work together to maintain system efficiency.
 
-Why systemd Matters
+---
 
-Service lifecycle management
+# 2️⃣ System Libraries
 
-Automatic restarts
+System libraries provide predefined functions that allow applications and utilities to use kernel features without interacting with it directly.
 
-Dependency control
+They offer standardized interfaces for system operations.
 
-Centralized logging
+## Common System Libraries
 
-If systemd dies, the system dies.
-That’s why PID 1 is sacred.
+- **glibc (GNU C Library)** – Provides core system calls and essential functions  
+- **libpthread** – Supports multithreading  
+- **libdl** – Handles dynamic linking of shared libraries  
+- **libm** – Mathematical functions  
+- **librt** – Real-time extensions  
+- **libcrypt** – Cryptographic operations  
+- **libnss** – Name service resolution  
+- **libstdc++** – C++ standard library  
 
-5. Process Creation (How Programs Come Alive)
-Process Birth
+System libraries simplify application development and improve portability.
 
-fork() → parent process duplicates itself
+---
 
-exec() → child loads a new program
+# 3️⃣ Shell
 
-Kernel assigns a PID
+The **Shell** is the interface between the user and the kernel.
 
-Every process:
+It:
 
-Has a parent
+- Accepts user commands  
+- Interprets them  
+- Passes requests to the kernel  
 
-Consumes memory
+The shell does not directly access hardware.  
+It communicates with the kernel, which performs the requested action.
 
-Competes for CPU
+---
 
-Nothing is free.
+## 🔹 Types of Shells
 
-6. Process States (You Must Recognize These)
-State	Meaning
-R	Running on CPU
-S	Sleeping (waiting for event)
-D	Uninterruptible sleep (I/O wait)
-T	Stopped
-Z	Zombie (dead, not cleaned up)
-DevOps Insight
+### 1. Bourne Shell (sh)
+- Early Unix shell  
+- Basic scripting  
+- Lightweight and reliable  
 
-Many D processes → disk or network issue
+### 2. C Shell (csh)
+- Syntax similar to C programming  
+- Introduced command history  
 
-Many Z processes → bad parent process
+### 3. Korn Shell (ksh)
+- Combines features of sh and csh  
+- Widely used in enterprise environments  
 
-High R → CPU saturation
+### 4. Bash (Bourne Again Shell)
+- Default shell on most Linux distributions  
+- Command history, tab completion, scripting enhancements  
 
-This is how incidents start.
+### 5. Z Shell (zsh)
+- Highly customizable  
+- Advanced auto-completion and plugins  
 
-7. systemd in Practice (Real Control)
-Core Actions
-systemctl status nginx
-systemctl start nginx
-systemctl stop nginx
-systemctl restart nginx
-systemctl enable nginx
+### 6. Fish (Friendly Interactive Shell)
+- User-friendly  
+- Syntax highlighting and command suggestions  
 
+Each shell offers a different experience but performs the same fundamental role.
 
-systemd ensures:
+---
 
-Services start after reboot
+# 4️⃣ Hardware Layer
 
-Failed services restart
+The hardware layer is the foundation of the Linux operating system.
 
-Logs are traceable
+It includes:
 
-8. Logs: Where Truth Lives
-systemd Logging
-journalctl
-journalctl -u nginx
-journalctl -xe
+- CPU  
+- Memory (RAM)  
+- Storage devices  
+- Network interfaces  
+- Input/Output devices  
 
+The kernel interacts with hardware through **device drivers**, ensuring proper control of CPU operations, memory access, and I/O communication.
 
-Logs explain why, not just what failed.
+Without hardware, software cannot execute.
 
-No logs = blind debugging.
+---
 
-9. 5 Commands Used Every Day
-Command	Why It Matters
-ps aux	See all processes
-top / htop	Resource monitoring
-systemctl	Service control
-journalctl	Logs
-kill	Stop broken processes
+# 5️⃣ System Utilities
 
-These are not optional skills.
+System utilities are command-line tools that help manage and monitor the Linux system.
 
-10. Interactive Checks (Do These)
+They assist in:
 
-Try this on your system:
+- File and directory management  
+- Monitoring system performance  
+- Managing users and permissions  
+- Configuring network settings  
+- Troubleshooting system issues  
 
-ps -p 1
+Examples include:
 
+- `ls`, `cp`, `mv`, `rm`
+- `ps`, `top`
+- `useradd`, `chmod`
+- `ifconfig`, `ip`
 
-→ Confirm systemd is PID 1
+System utilities simplify administration and operational tasks.
 
-systemctl list-units --type=service
+---
 
+# 🔄 Layer Interaction Summary
 
-→ See active services
 
-top
+Each layer communicates downward.
 
+This layered design ensures:
 
-→ Observe CPU ownership
+- Modularity  
+- Stability  
+- Security  
+- Efficient resource management  
 
-journalctl -b
+---
 
+# 🎯 Why This Matters for DevOps
 
-→ Read boot logs
+Understanding Linux architecture allows:
 
-11. Why This Matters for DevOps
+- Better troubleshooting  
+- Clear identification of failure layers  
+- Efficient system optimization  
+- Confident debugging of production systems  
 
-Every DevOps failure eventually becomes:
+Every system issue eventually maps to one of these layers.
 
-A stuck process
-
-A failed service
-
-A resource bottleneck
-
-A mismanaged restart
-
-Linux knowledge lets you:
-
-Diagnose instead of guessing
-
-Act instead of panic
-
-Fix instead of rebooting blindly
-
-This is the difference between an operator and an engineer.
-
-Final Mental Model
-
-Kernel = judge
-
-systemd = conductor
-
-Processes = workers
-
-Logs = history
-
-You = debugger
-
-Master this, and Docker, Kubernetes, and cloud systems stop being mysterious.
-
-Next logical continuation (no rush):
-
-Linux → Containers
-
-systemd → Kubernetes control loops
-
-Processes → Pods
-
-Same ideas. Bigger scale.
+Strong foundation → Stable infrastructure.

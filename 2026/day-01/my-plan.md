@@ -1,14 +1,14 @@
 **My 90 days DevOps and cloud learning plan **
 
 - **Current level:**
-  - I understand the basic the basic idea of DevOps (collaboration b/w devs and ops, automations, and I know that as DevOps it is my job to bring efficiency.
+  - I understand the basic the basic idea of DevOps collaboration b/w devs and ops, automations, and I know that as DevOps it is my job to bring efficiency.
 
 - **My understanding:**
   - As I attend TWS today's live session "DevOps is a mindset and a set of practices that focus on automations, reliability, and time efficiency in software delivery.
 
 - **Why I am learning DevOps:**
-  - So heres why I choose DevOps as the skill path the reason is when I got my first internship as web developer in 2023 I got interacted with the IT culturethen it won't take me so long to identify the most interesting and dependable jod in        the whole office which is DevOps but life has its own way to treat your ambition and then as I was familier with IT culture I gave interview for a QA role and get selected I work one whole year at this position and by doing this job it          brings me more closerto DevOps practices, then in 2025 August I started watching TWS one shot videos and finally when I have have a budget I immediately brought this amazing course.
-  - the simple reason why I choose DevOps as career path is, it was the only thing which excite me the most at very first time (and I am a huge beliver in love at first sight). I want to be the engineer who keeps system running, scalable, and       sane.
+  - So heres why I choose DevOps as the skill path the reason is when I got my first internship as web developer in 2023 I got interacted with the IT culturethen it won't take me so long to identify the most interesting and dependable jod in    the whole office which is DevOps but life has its own way to treat your ambition and then as I was familier with IT culture I gave interview for a QA role and get selected I work one whole year at this position and by doing this job it          brings me more closerto DevOps practices, then in 2025 August I started watching TWS one shot videos and finally when I have have a budget I immediately brought this amazing course.
+  - the simple reason why I choose DevOps as career path is, it was the only thing which excite me the most at very first time (and I am a huge beliver in love at first sight). I want to be the engineer who keeps system running, scalable, and   sane.
 
 - **Where I want to reach in 90 days:**
   - By the end of the 90 days, I want to move from theory to hands-on confidence.
