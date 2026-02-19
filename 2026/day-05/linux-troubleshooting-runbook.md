@@ -487,10 +487,3 @@ sudo lsof -p <nginx_pid>
 - Inspect open file descriptors.
 - Investigate worker processes individually if needed.
 
----
-
-## ✅ Conclusion
-
-- Manual execution failed (expected without elevated privileges).
-- `systemd`-managed Nginx is healthy.
-- CPU, memory, disk, IO, network, and log checks all indicate a healthy baseline state.
