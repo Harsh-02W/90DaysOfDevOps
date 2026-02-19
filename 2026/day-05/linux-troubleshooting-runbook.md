@@ -147,6 +147,29 @@ MiB Swap: 0.0 total, 0.0 used
 - Memory usage is moderate and healthy.
 - No swap usage → no memory pressure.
 
+```bash
+top -p 13078
+```
+
+**Output:**
+
+```text
+Tasks: 1 total, 0 running, 1 sleeping, 0 zombie
+%Cpu(s): 99.8 id
+MiB Mem: 914.2 total, 405.1 used, 212.5 free, 469.7 buff/cache
+PID 13078 nginx 0.0% CPU 0.2% MEM 
+```
+
+**Observation:**
+
+- PID 13078 is `nginx`.
+- Only nginx process being monitored.
+- CPU usage: 0.0% → No load on nginx.
+- Memory usage: 0.2% (~2MB) → Very lightweight.
+- Process state: Sleeping (normal when idle).
+- No resource spike detected.
+- System remains ~99% idle.
+
 ### 🔹 Process Inspection
 
 ```bash
@@ -409,4 +432,65 @@ tail -n 10 zookeeper.log
 
 ---
 
+## 8️⃣ Quick Findings
 
+- `nginx` service is active and stable under `systemd`.
+- No configuration errors detected (`nginx -T` successful).
+- CPU usage near `0%`, load average `0.00` → no compute pressure.
+- Memory usage within a safe baseline; no swap activity.
+- Disk usage only `13%` → no storage risk.
+- Log directory is small (`21MB`) → no abnormal growth.
+- No errors in `nginx error.log` (`0 bytes`).
+- `strace` confirms master process is idle and waiting for signals.
+- Network connectivity is stable (DNS + outbound traffic working).
+- No abnormal IO, CPU spikes, or blocked processes observed.
+
+**Overall System State:** Healthy baseline.
+No signs of resource exhaustion, service instability, or misconfiguration.
+
+---
+
+## 🚨 If This Worsens (Next Steps)
+
+### 1️⃣ Graceful Restart Strategy (if Nginx becomes unresponsive)
+
+```bash
+sudo systemctl restart nginx
+sudo systemctl status nginx
+```
+
+- Verify clean restart.
+- Confirm new PID and active state.
+- Re-check CPU and logs after restart.
+
+### 2️⃣ Increase Log Visibility (if errors begin appearing)
+
+```bash
+journalctl -u nginx -n 200
+sudo tail -n 100 /var/log/nginx/error.log
+```
+
+- Look for `5xx` errors, upstream timeouts, and permission failures.
+- Monitor log growth rate.
+- Confirm correct `error_log` path via `nginx -T`.
+
+### 3️⃣ Deep Process-Level Inspection (if high CPU or hang occurs)
+
+```bash
+top -p <nginx_pid>
+sudo strace -p <nginx_pid>
+sudo lsof -p <nginx_pid>
+```
+
+- Identify CPU spikes or memory leaks.
+- Check for blocking I/O calls.
+- Inspect open file descriptors.
+- Investigate worker processes individually if needed.
+
+---
+
+## ✅ Conclusion
+
+- Manual execution failed (expected without elevated privileges).
+- `systemd`-managed Nginx is healthy.
+- CPU, memory, disk, IO, network, and log checks all indicate a healthy baseline state.
