@@ -72,11 +72,3 @@ tail -n 10 notes.txt
 → It will display the last 10 lines of the file.
 
 ---
-
-## ✅ Conclusion
-
-Today’s practice strengthened understanding of shell redirection and file handling behavior.
-
-By manually creating, modifying, and verifying `notes.txt`, I observed how Linux processes input and output in real time.
-
-Mastery of these basics is essential before moving to higher-level automation tools.
